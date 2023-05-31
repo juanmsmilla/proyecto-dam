@@ -26,7 +26,9 @@ def main():
     st.set_page_config(page_title="PDF bot")
     st.header("PDF chatbot - Juan Miguel Sánchez Milla")
 
-    pdf = st.file_uploader("Adjuntar pdf", type="pdf")
+    if "pdf" not in st.session_state:
+        pdf = st.file_uploader("Adjuntar pdf", type="pdf")
+        st.session_state["pdf"] = pdf
 
     if pdf is not None:
         # índice vectorial del texto del pdf. Usa FAISS
