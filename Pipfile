@@ -11,6 +11,7 @@ streamlit = "*"
 python-dotenv = "*"
 lxml = "*"
 pypdf2 = "*"
+tiktoken = "*"
 
 [dev-packages]
 
