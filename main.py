@@ -42,7 +42,6 @@ if pdf is not None:
 
     if user_input:
         with st.spinner("Generando respuesta..."):
-            st.write("spinner")
             generated_response = generate_answer(
                 vector_index,
                 query=user_input,
@@ -51,18 +50,16 @@ if pdf is not None:
 
             # añadir datos a la sesión de streamlit
             st.session_state["user_prompt_history"].append(user_input)
-            st.session_state["chat_answer_history"].append(generated_response)
+            st.session_state["chat_answer_history"].append(generated_response["answer"])
             st.session_state["chat_history"].append((user_input, generated_response["answer"]))
 
 
     st.write(st.session_state["chat_answer_history"])
     if st.session_state["chat_answer_history"]:
-        st.write("pasa 1")
         for generated_response, user_query in zip(
                 st.session_state["chat_answer_history"],
                 st.session_state["user_prompt_history"]
         ):
-            st.write("pasa 2")
             message(user_query, is_user=True)
             message(generated_response)
     # if user_question:
