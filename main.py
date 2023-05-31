@@ -12,7 +12,7 @@ from backend.core import indexing_pdf
 def main():
     load_dotenv()
     st.set_page_config(page_title="PDF bot")
-    st.header("PDF chatbot 💬 - Juan Miguel Sánchez Milla")
+    st.header("PDF chatbot - Juan Miguel Sánchez Milla")
 
     pdf = st.file_uploader("Adjuntar pdf", type="pdf")
 
