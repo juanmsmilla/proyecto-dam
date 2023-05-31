@@ -1,11 +1,13 @@
 from dotenv import load_dotenv
 import streamlit as st
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.chains.question_answering import load_qa_chain
-from langchain.llms import OpenAI
-from langchain.callbacks import get_openai_callback
+# from langchain.text_splitter import CharacterTextSplitter
+# from langchain.embeddings.openai import OpenAIEmbeddings
+# from langchain.vectorstores import FAISS
+# from langchain.chains.question_answering import load_qa_chain
+# from langchain.llms import OpenAI
+# from langchain.callbacks import get_openai_callback
+from streamlit_chat import message
+
 from backend.core import indexing_pdf, generate_answer
 
 
@@ -43,7 +45,7 @@ def main():
 
         if user_input:
             with st.spinner("Generando respuesta..."):
-                generated_response = generate_response(
+                generated_response = generate_answer(
                     vector_index,
                     query=user_input,
                     chat_history=st.session_state["chat_history"]
