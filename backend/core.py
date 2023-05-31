@@ -8,9 +8,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from PyPDF2 import PdfReader
 
 
-# el decorador cachea el archivo
-
-# @st.experimental_memo(experimental_allow_widgets=True)
+# el decorador cachea el archivo. necesario para no ser borrado al reinicio de sesion
 @st.cache_data(experimental_allow_widgets=True)
 def get_pdf():
     return st.file_uploader("Arrastra aquí tu PDF", type="pdf")

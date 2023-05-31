@@ -7,16 +7,17 @@ import streamlit as st
 # from langchain.llms import OpenAI
 # from langchain.callbacks import get_openai_callback
 from streamlit_chat import message
+from backend.core import indexing_pdf, generate_answer, get_pdf
 
 
 load_dotenv()
 
 
-st.set_page_config(page_title="PDF bot")
+# st.set_page_config(page_title="PDF bot")
 st.header("PDF chatbot - Juan Miguel Sánchez Milla")
 
 
-from backend.core import indexing_pdf, generate_answer, get_pdf
+# from backend.core import indexing_pdf, generate_answer, get_pdf
 
 if "user_prompt_history" not in st.session_state:
     st.session_state["user_prompt_history"] = []
@@ -54,7 +55,6 @@ if pdf is not None:
             st.session_state["chat_history"].append((user_input, generated_response["answer"]))
 
 
-    st.write(st.session_state["chat_answer_history"])
     if st.session_state["chat_answer_history"]:
         for generated_response, user_query in zip(
                 st.session_state["chat_answer_history"],
