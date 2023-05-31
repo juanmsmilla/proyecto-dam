@@ -13,6 +13,7 @@ lxml = "*"
 pypdf2 = "*"
 tiktoken = "*"
 faiss-cpu = "*"
+streamlit-chat = "*"
 
 [dev-packages]
 
