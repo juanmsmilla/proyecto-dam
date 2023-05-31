@@ -12,6 +12,7 @@ python-dotenv = "*"
 lxml = "*"
 pypdf2 = "*"
 tiktoken = "*"
+faiss-cpu = "*"
 
 [dev-packages]
 
