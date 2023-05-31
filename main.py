@@ -30,6 +30,8 @@ def main():
         pdf = st.file_uploader("Adjuntar pdf", type="pdf")
         st.session_state["pdf"] = pdf
 
+    pdf = st.session_state["pdf"]
+
     if pdf is not None:
         # índice vectorial del texto del pdf. Usa FAISS
         vector_index = indexing_pdf(pdf)
