@@ -8,6 +8,7 @@ from static.styles import HIDE_ST_STYLE
 load_dotenv()
 
 
+
 # st.set_page_config(page_title="PDF bot")
 st.header("PDF chatbot - Juan Miguel Sánchez Milla")
 st.markdown(HIDE_ST_STYLE, unsafe_allow_html=True)
