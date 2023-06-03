@@ -43,8 +43,8 @@ def generate_answer(
         chat_history: List[Tuple[str, Any]] = [],
 ) -> Any:
     # verbose=True - respuestas menos concisas
-    # temperature=0 - respuestas no creativas
-    chat = ChatOpenAI(verbose=True, temperature=0)
+    # temperature valores del 0(min) al 1(max)
+    chat = ChatOpenAI(verbose=True, temperature=0.2)
 
     answer = ConversationalRetrievalChain.from_llm(
         llm=chat, retriever=vector_index.as_retriever()

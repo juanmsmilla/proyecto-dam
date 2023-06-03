@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import streamlit as st
 from streamlit_chat import message
 from backend.core import indexing_pdf, generate_answer, get_pdf
-from static.style_vals import HIDE_ST_STYLE
+from static.styles import HIDE_ST_STYLE
 
 
 load_dotenv()
@@ -15,8 +15,6 @@ st.markdown(HIDE_ST_STYLE, unsafe_allow_html=True)
 # todo next line not needed(?)
 # docs = vector_index.similarity_search(query)
 
-
-# from backend.core import indexing_pdf, generate_answer, get_pdf
 
 if "user_prompt_history" not in st.session_state:
     st.session_state["user_prompt_history"] = []
