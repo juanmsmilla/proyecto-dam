@@ -15,6 +15,7 @@ tiktoken = "*"
 faiss-cpu = "*"
 streamlit-chat = "*"
 pinecone-client = "*"
+currencyconverter = "*"
 
 [dev-packages]
 
