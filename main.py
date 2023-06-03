@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import streamlit as st
 from streamlit_chat import message
-from backend.core import indexing_pdf, generate_answer, get_pdf
+from backend.core import index_pdf_FAISS, generate_response
 from static.styles import HIDE_ST_STYLE
 
 
@@ -26,22 +26,24 @@ if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
 
 
-# pdf = st.sidebar.file_uploader("Arrastra un .pdf", type="pdf", accept_multiple_files=True)
-pdf = get_pdf()
 
-if pdf is not None:
-    # índice vectorial del texto del pdf. Usa FAISS
-    vector_index = indexing_pdf(pdf)
+# pdf = st.sidebar.file_uploader("Arrastra un .pdf", type="pdf", accept_multiple_files=True)
+
+# índice vectorial del texto del pdf. Usa FAISS y OpenAI embeddings
+
+pdf_vector_index = index_pdf_FAISS()
+
+if pdf_vector_index is not None:
 
     # user input
     user_input = st.text_input("Pregunta a tu PDF:")
 
 
-
     if user_input:
+        # spinner es un widget UI.
         with st.spinner("Generando respuesta..."):
-            generated_response = generate_answer(
-                vector_index,
+            generated_response = generate_response(
+                pdf_vector_index,
                 query=user_input,
                 chat_history=st.session_state["chat_history"]
             )
