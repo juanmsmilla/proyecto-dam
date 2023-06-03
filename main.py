@@ -1,13 +1,8 @@
 from dotenv import load_dotenv
 import streamlit as st
-# from langchain.text_splitter import CharacterTextSplitter
-# from langchain.embeddings.openai import OpenAIEmbeddings
-# from langchain.vectorstores import FAISS
-# from langchain.chains.question_answering import load_qa_chain
-# from langchain.llms import OpenAI
-# from langchain.callbacks import get_openai_callback
 from streamlit_chat import message
 from backend.core import indexing_pdf, generate_answer, get_pdf
+from static.style_vals import HIDE_ST_STYLE
 
 
 load_dotenv()
@@ -15,6 +10,10 @@ load_dotenv()
 
 # st.set_page_config(page_title="PDF bot")
 st.header("PDF chatbot - Juan Miguel Sánchez Milla")
+st.markdown(HIDE_ST_STYLE, unsafe_allow_html=True)
+
+# todo next line not needed(?)
+# docs = vector_index.similarity_search(query)
 
 
 # from backend.core import indexing_pdf, generate_answer, get_pdf
@@ -62,17 +61,7 @@ if pdf is not None:
         ):
             message(user_query, is_user=True)
             message(generated_response)
-    # if user_question:
-        # documentos(langchain) similares a user_question
-        # docs = vector_index.similarity_search(user_question)
 
-        # llm = OpenAI()
-        # chain = load_qa_chain(llm, chain_type="stuff")
-        # with get_openai_callback() as cb:
-        #     response = chain.run(input_documents=docs, question=user_question)
-        #     print(cb)
-        #
-        # st.write(response)
 
 
 
