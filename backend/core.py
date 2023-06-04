@@ -19,6 +19,17 @@ def get_pdf_text():
 
         return text
 
+
+def add_pdfs(pdfs):
+    text = ""
+    for pdf in pdfs:
+        pdf_reader = PdfReader(pdf, )
+        for page in pdf_reader.pages:
+            text += page.extract_text()
+
+    return text
+
+
 # el decorador cachea el return. necesario para no ser borrado al reinicio de sesion
 # @st.cache_data(experimental_allow_widgets=True)
 def index_pdf_faiss(pdf_text, chunk_size: int = 1000, chunk_overlap: int = 200):
@@ -52,8 +63,11 @@ def generate_response(
         query: str,
         chat_history: List[Tuple[str, Any]] = []):
     # buscar info solo en pdf
-    formated_query = f'Busca la siguiente pregunta en el documento: `{query}`. Si no encuentas la respuesta' \
-                     f'responde únicamente: "El documento no contiene información relacionada."'
+
+
+    formated_query = f'Busca la siguiente pregunta `{query}` en los documentos y el contexto adjunto. Si no encuentas la respuesta' \
+                     f'responde únicamente: "No pude encontrar información relacionada."'
+
 
     # verbose=True - respuestas menos concisas
     # temperature - valores del 0(min) al 1(max)
@@ -65,15 +79,6 @@ def generate_response(
 
     return answer({"question": formated_query, "chat_history": chat_history})
 
-
-# def generate_response(query: str, chat_history: List[Tuple[str, Any]] = []):
-#
-#     # verbose=True - respuestas menos concisas
-#     # temperature - valores del 0(min) al 1(max)
-#     llm = ChatOpenAI(verbose=True, temperature=1)
-#     answer = ConversationalRetrievalChain.from_llm(llm=llm)
-#
-#     return answer({"question": query, "chat_history": chat_history})
 
 def load_qa_memory(query, answer) -> None:
     st.session_state["user_prompt_history"].append(query)
@@ -89,15 +94,3 @@ def load_costs_memory(cb) -> None:
 def initialize_session_var(name: str, val: Any) -> None:
     if name not in st.session_state:
         st.session_state[name] = val
-
-# def generate_response_context(input_text, faiss_index):
-#     memory = st.session_state["memory"]
-#     memory.save_context({"input": input_text}, {})
-#     conversation_history = memory.load_memory_variables({})['history']
-#     # pasajes relevantes
-#     docs = faiss_index.similarity_search()
-#     response = llm.generate_text(prompt=conversation_history + docs)
-#
-#     memory.save_context({}, {"output": response})
-#
-#     response
