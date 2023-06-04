@@ -33,14 +33,6 @@ def add_pdfs(pdfs):
 # el decorador cachea el return. necesario para no ser borrado al reinicio de sesion
 # @st.cache_data(experimental_allow_widgets=True)
 def index_pdf_faiss(pdf_text, chunk_size: int = 1000, chunk_overlap: int = 200):
-    # if pdf is not None:
-    # st.write(pdf)
-    # pdf_reader = PdfReader(pdf, )
-    # text = ""
-    # for page in pdf_reader.pages:
-    #     text += page.extract_text()
-    #
-    # st.write(f"pdf text type{type(text)}")
 
     # chunks
     splitter = CharacterTextSplitter(
@@ -65,8 +57,9 @@ def generate_response(
     # buscar info solo en pdf
 
 
-    formated_query = f'Busca la siguiente pregunta `{query}` en los documentos y el contexto adjunto. Si no encuentas la respuesta' \
-                     f'responde únicamente: "No pude encontrar información relacionada."'
+    formated_query = f'Responde a la pregunta `{query}` limitando el contexto a los documentos proporcionados. ' \
+                     f'Si no encuentras información sobre la pregunta en el contexto proporcionado responde:' \
+                     f'"El contexto no contiene información relevante a la pregunta.'
 
 
     # verbose=True - respuestas menos concisas
