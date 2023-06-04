@@ -14,6 +14,7 @@ pinecone.init(
 
 
 def ingest_docs() -> None:
+    # cambiar el path a docs/langchain-docs/python.langchain.com/en/latest para funcionar sobre langchain doc
     loader = ReadTheDocsLoader(path="pruebas", features="html.parser",
                                encoding="utf8")
     raw_documents = loader.load()
